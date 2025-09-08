@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
-function login() {
+function Login() {
     const [form, setform] = useState({
         email: "",
         password: "", 
@@ -113,4 +113,4 @@ function login() {
   )
 }
 
-export default login
+export default Login

@@ -11,9 +11,9 @@ const schema = z.object({
         password: z.string().min(6).regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/, "Password must contain at least one uppercase letter, one lowercase letter, and one number"),
         confirmPassword: z.string().min(6, "Confirm Password is required")
     })
-            .refine((data) => data.password === data.confirmPassword, {
-            path: ["confirmPassword"], 
-            message: "Passwords do not match",
+    .refine((data) => data.password === data.confirmPassword, {
+        path: ["confirmPassword"], 
+        message: "Passwords do not match",
     });
           
     
