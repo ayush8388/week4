@@ -18,7 +18,7 @@ const schema = z.object({
           
     
 
-function signUpWithZod() {
+function SignUpWithZod() {
     const {register, handleSubmit , formState: {errors}} = useForm({
         resolver: zodResolver(schema)
     });
@@ -134,4 +134,4 @@ function signUpWithZod() {
   )
 }
 
-export default signUpWithZod
+export default SignUpWithZod
