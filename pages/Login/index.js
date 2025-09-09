@@ -3,6 +3,7 @@ import React from 'react'
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { usePasswordValidation } from "@/hooks/usePasswordValidation"
 
 function Login() {
     const [form, setform] = useState({
@@ -16,6 +17,8 @@ function Login() {
         password: "", 
         confirmPassword: ""
       })
+
+      const {validatePassword, validateConfirmPassword} = usePasswordValidation()
     
       const validateForm = ({ name, value }) => {
         if (name === "email") {
@@ -25,25 +28,11 @@ function Login() {
             setErrors((prev) => ({ ...prev, email: "" }))
           }
         }
-    
         if (name === "password") {
-          if (!value) {
-            setErrors((prev) => ({ ...prev, password: "Password is required" }))
-          } else if (value.length < 6) {
-            setErrors((prev) => ({...prev, password: "Password must be at least 6 characters"}))
-          } else {
-            setErrors((prev) => ({ ...prev, password: "" }))
-          }
+          setErrors((prev) => ({ ...prev, password: validatePassword(value) }))
         }
-    
         if (name === "confirmPassword") {
-          if (!value) {
-            setErrors((prev) => ({...prev, confirmPassword: "Confirm Password is required"}))
-          } else if (value !== form.password) {
-            setErrors((prev) => ({...prev, confirmPassword: "Passwords do not match"}))
-          } else {
-            setErrors((prev) => ({ ...prev, confirmPassword: "" }))
-          }
+          setErrors((prev) => ({ ...prev, confirmPassword: validateConfirmPassword(value, form.password) }))
         }
       }
     

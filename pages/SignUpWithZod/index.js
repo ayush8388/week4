@@ -33,13 +33,7 @@ function SignUpWithZod() {
           <div className="flex flex-col">
             <label className="mb-1 text-sm font-medium">Name</label>
             <input
-            {...register("name",{
-                required: "Name is required",
-                minLength: {
-                    value: 3,
-                    message: "Name must be at least 3 characters"
-                }
-            })}
+            {...register("name")}
               type="text"
               name="name"
               placeholder="Enter your name"
@@ -50,13 +44,7 @@ function SignUpWithZod() {
           <div className="flex flex-col">
             <label className="mb-1 text-sm font-medium">Email</label>
             <input
-            {...register("email", {
-                required: "Email is required",
-                pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Invalid email address"
-                }
-            })}
+            {...register("email")}
               type="email"
               name="email"
               placeholder="Enter your email"
@@ -67,17 +55,7 @@ function SignUpWithZod() {
           <div className="flex flex-col">
             <label className="mb-1 text-sm font-medium">Age</label>
             <input
-            {...register("age",{
-                required: "Age is required",
-                min: {
-                    value: 18,
-                    message: "Age must be at least 18"
-                },
-                max: {
-                    value: 100,
-                    message: "Age must be less than 100"
-                }
-            })}
+            {...register("age")}
               type="number"
               name="age"
               placeholder="Enter your age"
@@ -88,17 +66,7 @@ function SignUpWithZod() {
           <div className="flex flex-col">
             <label className="mb-1 text-sm font-medium">Password</label>
             <input
-            {...register("password", {
-                required: "Password is required",
-                minLength: {
-                    value: 6,
-                    message: "Password must be at least 6 characters"
-                },
-                pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
-                    message: "Password must contain at least one uppercase letter, one lowercase letter, and one number"
-                }
-            })}
+            {...register("password",)}
               type="password"
               name="password"
               placeholder="Enter your password"
@@ -109,10 +77,7 @@ function SignUpWithZod() {
           <div className="flex flex-col">
             <label className="mb-1 text-sm font-medium">Confirm Password</label>
             <input
-            {...register("confirmPassword",{
-                required: "Confirm Password is required",
-                validate: (value) => value === watch("password")
-            })}
+            {...register("confirmPassword",)}
               type="password"
               name="confirmPassword"
               placeholder="Confirm your password"

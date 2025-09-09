@@ -1,9 +1,11 @@
 "use client"
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { usePasswordValidation } from "@/hooks/usePasswordValidation"
 
 function Signup() {
-    const {register, handleSubmit , formState: {errors}} = useForm();
+    const {register, handleSubmit, watch, formState: {errors}} = useForm();
+    const {validatePassword, validateConfirmPassword} = usePasswordValidation()
 
     const onSubmit = (data) => {
         console.log(data)
@@ -72,15 +74,7 @@ function Signup() {
             <label className="mb-1 text-sm font-medium">Password</label>
             <input
             {...register("password", {
-                required: "Password is required",
-                minLength: {
-                    value: 6,
-                    message: "Password must be at least 6 characters"
-                },
-                pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
-                    message: "Password must contain at least one uppercase letter, one lowercase letter, and one number"
-                }
+                validate: (value) => validatePassword(value)
             })}
               type="password"
               name="password"
@@ -93,8 +87,7 @@ function Signup() {
             <label className="mb-1 text-sm font-medium">Confirm Password</label>
             <input
             {...register("confirmPassword",{
-                required: "Confirm Password is required",
-                validate: (value) => value === watch("password")
+                validate: (value) => validateConfirmPassword( watch("password"),value)
             })}
               type="password"
               name="confirmPassword"
