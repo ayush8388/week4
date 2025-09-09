@@ -4,12 +4,13 @@ import { useForm } from 'react-hook-form'
 import { usePasswordValidation } from "@/hooks/usePasswordValidation"
 
 function Signup() {
-    const {register, handleSubmit, watch, formState: {errors}} = useForm();
+    const {register, handleSubmit, watch, formState: {errors}} = useForm({mode: "onChange"});
     const {validatePassword, validateConfirmPassword} = usePasswordValidation()
 
     const onSubmit = (data) => {
         console.log(data)
     }
+
   return (
     <div className="h-screen flex flex-col items-center justify-center bg-gray-100">
       <div className="w-full max-w-md p-6 bg-white shadow-lg rounded-xl">

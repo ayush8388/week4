@@ -1,4 +1,3 @@
-"use client"
 export function usePasswordValidation() {
     const validatePassword = (password) => {
         if (password.length < 6) {

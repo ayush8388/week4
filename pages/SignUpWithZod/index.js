@@ -13,14 +13,15 @@ const schema = z.object({
     })
     .refine((data) => data.password === data.confirmPassword, {
         path: ["confirmPassword"], 
-        message: "Passwords do not match",
+        message: "Password do not match",
     });
           
     
 
 function SignUpWithZod() {
     const {register, handleSubmit , formState: {errors}} = useForm({
-        resolver: zodResolver(schema)
+        resolver: zodResolver(schema),
+        mode: "onChange"
     });
     const onSubmit = (data) => {
         console.log(data)
@@ -66,7 +67,7 @@ function SignUpWithZod() {
           <div className="flex flex-col">
             <label className="mb-1 text-sm font-medium">Password</label>
             <input
-            {...register("password",)}
+            {...register("password")}
               type="password"
               name="password"
               placeholder="Enter your password"
@@ -77,7 +78,7 @@ function SignUpWithZod() {
           <div className="flex flex-col">
             <label className="mb-1 text-sm font-medium">Confirm Password</label>
             <input
-            {...register("confirmPassword",)}
+            {...register("confirmPassword")}
               type="password"
               name="confirmPassword"
               placeholder="Confirm your password"
